@@ -1,0 +1,64 @@
+<html ng-app="ExpenseApp" ng-controller="indexController">
+<head>
+    <!-- SCROLLS -->
+    <!-- load bootstrap and fontawesome via CDN -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/font-awesome.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+
+    <!-- SPELLS -->
+    <!-- load angular and angular route via CDN -->
+    <script src="AngularJs/angular.min.js"></script>
+    <script src="AngularJs/angular-route.min.js"></script>
+    <script src="AngularJs/angular-route.js"></script>
+    <script src="controllers/indexController.js"></script>
+</head>
+<body>
+
+<!-- HEADER AND NAVBAR -->
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand">Expense App</a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="/partials/report.html"><i class="fa fa-file-text"></i>Reports</a></li>
+                <li><a href="/partials/expenses.html"><i class="fa fa-pencil"></i>Expenses Control</a></li>
+                <li><a href="/partials/users.html"><i class="fa fa-pencil"></i>User Control</a></li>
+                <li><a href="/partials/suppliers.html"><i class="fa fa-pencil"></i>Suppliers Control</a></li>
+                <li><a href="/partials/supplierCategories.html"><i class="fa fa-pencil"></i>Supplier Categories Control</a>
+                </li>
+                <li><a href="/partials/paymentTypes.html"><i class="fa fa-pencil"></i>Payment Types Control</a></li>
+                <li>
+                    <button class="pull-right" ng-click="terminal()">SQL</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div class="col-md-6">
+    <h1>D&J Home Page</h1>
+</div>
+<div class="col-md-12 pull-left">
+    <div class="col-md-6">
+        <img class="pull-center" ng-src="/images/Logo.JPG" width="900" height="600">
+    </div>
+    <div class="col-md-6">
+        <h1>Darmok and Jalad at Tanagra</h1>
+        <h1>Shaka, when the walls fell</h1>
+        <h1>Mirab, his sails unfurled</h1>
+        <h1>Sokath - his eyes uncovered</h1>
+        <h1>Kailash, when it rises</h1>
+        <h1> The river Temarc - in winter</h1>
+        <h1>Chenza at court - the court of silence</h1>
+        <h1>Uzani - his army with fist open</h1>
+        <h1>His army with fist closed</h1>
+    </div>
+</div>
+</body>
+</html>

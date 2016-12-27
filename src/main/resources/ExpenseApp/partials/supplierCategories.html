@@ -1,0 +1,69 @@
+<html ng-app="ExpenseApp" ng-controller="supplierCategoriesController" ng-init="getCategory()">
+<head>
+    <!-- SCROLLS -->
+    <!-- load bootstrap and fontawesome via CDN -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <link rel="stylesheet" href="../css/font-awesome.css"/>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+
+    <!-- SPELLS -->
+    <!-- load angular and angular route via CDN -->
+    <script src="../AngularJs/angular.min.js"></script>
+    <script src="../AngularJs/angular-route.min.js"></script>
+    <script src="../AngularJs/angular-route.js"></script>
+    <script src="../controllers/supplierCategoriesController.js"></script>
+</head>
+<body>
+
+<!-- HEADER AND NAVBAR -->
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Supplier Categories Control</a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href=".."><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="report.html"><i class="fa fa-file-text"></i>Reports</a></li>
+                <li><a href="expenses.html"><i class="fa fa-pencil"></i>Expenses Control</a></li>
+                <li><a href="users.html"><i class="fa fa-pencil"></i>User Control</a></li>
+                <li><a href="suppliers.html"><i class="fa fa-pencil"></i>Suppliers Control</a></li>
+                <li><a href="supplierCategories.html"><i class="fa fa-pencil"></i>Supplier Categories Control</a></li>
+                <li><a href="paymentTypes.html"><i class="fa fa-pencil"></i>Payment Types Control</a></li>
+                <li><button class="pull-right" ng-click="terminal()">SQL</button></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+
+<row>
+    <div class="col-sm-2">
+        <ul class="nav nav-stacked nav-pills">
+            <li ng-class="{active:isSet(1)}"><a href ng-click="setTab(1)">Add</a></li>
+            <li ng-class="{active:isSet(2)}"><a href ng-click="setTab(2)">Edit</a></li>
+        </ul>
+    </div>
+
+    <div class="col-sm-10">
+        <div ng-show="isSet(1)">
+            Supplier Categories: <input type="text" class="form-control" ng-model="supplierCategory"/>
+            <button ng-click="addCategory(supplierCategory)">Submit</button>
+        </div>
+        <div ng-show="isSet(2)">
+            <table class="table">
+                <tr>
+                    <td ng-repeat="header in headers">{{header}}</td>
+                </tr>
+                <tr ng-repeat="category in supplierCategories">
+                    <td ng-repeat="data in category.row.slice().reverse()">{{data.value}}</td>
+                    <td><button ng-click="removeCategory($index)">Remove</button></td>
+                </tr>
+            </table>
+    </div>
+</row>
+
+</body>
+</html>
