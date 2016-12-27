@@ -17,7 +17,7 @@ object AccessSqls {
           s"$x ${
             x match {
               case amt if amt.contains("AMT") => "DECIMAL(20, 2)"
-              case id if id.contains("ID") => "DECIMAL(20, 2)"
+              case id if id.contains("ID") => "VARCHAR(255)"
               case date if date.contains("DATE") => "DATE"
               case any => "VARCHAR(255)"
             }
