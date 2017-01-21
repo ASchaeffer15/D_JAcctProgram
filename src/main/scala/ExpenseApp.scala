@@ -36,7 +36,7 @@ class ExpenseApp extends App {
   def terminal() = AppData.terminal()
 
   def initilize() = {
-    appDir = """D:\Users\Schaeffer""".stripMargin
+    appDir = """E:\Data""".stripMargin
     AppData.initilize(getFiles)
   }
 
