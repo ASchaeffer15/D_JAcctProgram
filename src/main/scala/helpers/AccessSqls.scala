@@ -65,9 +65,11 @@ object AccessSqls {
        DATE AS "Expense Date",
        EXPENSE_AMT AS "Total Amount",
        PERCENTAGE_AMT AS "Percentage" ,
-       (EXPENSE_AMT * PERCENTAGE_AMT) AS "D AND J AMOUNT",
+       (EXPENSE_AMT * A.MULTIPLIER_AMT) AS "D AND J AMOUNT",
        USER AS "Entered By"
-       FROM EXPENSES
+       FROM EXPENSES AS A
+       JOIN SUPPLIER AS B
+       ON A.SUPPLIER_NAME = B.NAME
        WHERE 1=1
        AND DATE >= '${setValue("DATE", fromDate)}'
        AND DATE <= '${setValue("DATE", toDate)}'
@@ -79,8 +81,10 @@ object AccessSqls {
       SELECT
        SUPPLIER_CATEGORY AS "Category",
        SUPPLIER_NAME AS "Supplier Name",
-       SUM(EXPENSE_AMT * PERCENTAGE_AMT) AS "Total"
-       FROM EXPENSES
+       SUM(EXPENSE_AMT * A.MULTIPLIER_AMT) AS "Total"
+       FROM EXPENSES AS A
+       JOIN SUPPLIER AS B
+       ON A.SUPPLIER_NAME = B.NAME
        WHERE 1=1
        AND DATE >= '${setValue("DATE", fromDate)}'
        AND DATE <= '${setValue("DATE", toDate)}'
@@ -94,8 +98,10 @@ object AccessSqls {
     s"""
       SELECT
        'D AND J' AS "Company",
-       SUM(EXPENSE_AMT * PERCENTAGE_AMT) AS "Total"
-       FROM EXPENSES
+       SUM(EXPENSE_AMT * A.MULTIPLIER_AMT) AS "Total"
+       FROM EXPENSES AS A
+       JOIN SUPPLIER AS B
+       ON A.SUPPLIER_NAME = B.NAME
        WHERE 1=1
        AND DATE >= '${setValue("DATE", fromDate)}'
        AND DATE <= '${setValue("DATE", toDate)}'
@@ -119,9 +125,11 @@ object AccessSqls {
        WHEN MONTH(DATE) = 11 THEN 'NOV'
        WHEN MONTH(DATE) = 12 THEN 'DEC'
        END AS "Month",
-       SUM(EXPENSE_AMT * PERCENTAGE_AMT) AS "Total",
-       |MONTH(DATE)
-       FROM EXPENSES
+       SUM(EXPENSE_AMT * A.MULTIPLIER_AMT) AS "Total",
+       MONTH(DATE)
+       FROM EXPENSES AS A
+       JOIN SUPPLIER AS B
+       ON A.SUPPLIER_NAME = B.NAME
        WHERE 1=1
        AND DATE >= '${setValue("DATE", fromDate)}'
        AND DATE <= '${setValue("DATE", toDate)}'
