@@ -60,12 +60,12 @@ object AccessSqls {
   def generateBasicReport(fromDate: String, toDate: String) = {
     s"""
       SELECT
-       SUPPLIER_CATEGORY AS "Category",
+       B.CATEGORY AS "Category",
        SUPPLIER_NAME AS "Supplier Name",
        DATE AS "Expense Date",
        EXPENSE_AMT AS "Total Amount",
        PERCENTAGE_AMT AS "Percentage" ,
-       (EXPENSE_AMT * A.MULTIPLIER_AMT) AS "D AND J AMOUNT",
+       (EXPENSE_AMT * B.MULTIPLIER_AMT) AS "D AND J AMOUNT",
        USER AS "Entered By"
        FROM EXPENSES AS A
        JOIN SUPPLIER AS B
@@ -79,9 +79,10 @@ object AccessSqls {
   def generateReportBySupplier(fromDate: String, toDate: String) = {
     s"""
       SELECT
-       SUPPLIER_CATEGORY AS "Category",
+       B.CATEGORY AS "Category",
        SUPPLIER_NAME AS "Supplier Name",
-       SUM(EXPENSE_AMT * A.MULTIPLIER_AMT) AS "Total"
+       SUM(EXPENSE_AMT * B.MULTIPLIER_AMT) AS "Total",
+       B.MULTIPLIER_AMT AS "Rate"
        FROM EXPENSES AS A
        JOIN SUPPLIER AS B
        ON A.SUPPLIER_NAME = B.NAME
@@ -90,7 +91,8 @@ object AccessSqls {
        AND DATE <= '${setValue("DATE", toDate)}'
        GROUP BY
        SUPPLIER_CATEGORY,
-       SUPPLIER_NAME
+       SUPPLIER_NAME,
+       |B.MULTIPLIER_AMT
        """.stripMargin
   }
 
@@ -98,7 +100,7 @@ object AccessSqls {
     s"""
       SELECT
        'D AND J' AS "Company",
-       SUM(EXPENSE_AMT * A.MULTIPLIER_AMT) AS "Total"
+       SUM(EXPENSE_AMT * B.MULTIPLIER_AMT) AS "Total"
        FROM EXPENSES AS A
        JOIN SUPPLIER AS B
        ON A.SUPPLIER_NAME = B.NAME
@@ -125,7 +127,7 @@ object AccessSqls {
        WHEN MONTH(DATE) = 11 THEN 'NOV'
        WHEN MONTH(DATE) = 12 THEN 'DEC'
        END AS "Month",
-       SUM(EXPENSE_AMT * A.MULTIPLIER_AMT) AS "Total",
+       SUM(EXPENSE_AMT * B.MULTIPLIER_AMT) AS "Total",
        MONTH(DATE)
        FROM EXPENSES AS A
        JOIN SUPPLIER AS B

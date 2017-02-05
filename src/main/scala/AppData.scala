@@ -28,6 +28,7 @@ object AppData {
     conn = ds.getConnection()
   filesArray.foreach {
       file =>
+        println(s"$file loading")
         val xmlFile = XML.loadFile(file)
         val name = (xmlFile \\ "name").map(_.text).head
         val headers = getHeaders(xmlFile)
@@ -36,7 +37,9 @@ object AppData {
         AppData.data = AppData.data :+ name
         val inserts: List[String] = AccessSqls.insertData(name, headers.toList, data)
         inserts.foreach(conn.createStatement().execute)
-    }
+        println(s"$file loaded")
+
+  }
     filesArray
   }
 
@@ -74,6 +77,7 @@ object AppData {
       case Success(result) =>
         extractDataFromDb(result)
       case Failure(e) =>
+        println(e.getMessage)
         List[Row]()
     }
   }

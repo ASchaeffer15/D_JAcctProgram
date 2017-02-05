@@ -67,7 +67,7 @@
                 <tr>
                     <td ng-repeat="header in headers.slice().reverse()">{{header}}</td>
                 </tr>
-                <tr ng-repeat="expense in expenses">
+                <tr ng-repeat="expense in expenses | orderBy:'DATE'">
                     <td ng-repeat="data in expense.row">{{data.value}}</td>
                     <td><button ng-click="removeExpenses($index)">Remove</button></td>
                 </tr>
