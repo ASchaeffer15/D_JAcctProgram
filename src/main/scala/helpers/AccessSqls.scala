@@ -64,7 +64,7 @@ object AccessSqls {
        SUPPLIER_NAME AS "Supplier Name",
        DATE AS "Expense Date",
        EXPENSE_AMT AS "Total Amount",
-       PERCENTAGE_AMT AS "Percentage" ,
+       B.MULTIPLIER_AMT AS "Percentage" ,
        (EXPENSE_AMT * B.MULTIPLIER_AMT) AS "D AND J AMOUNT",
        USER AS "Entered By"
        FROM EXPENSES AS A
@@ -90,9 +90,9 @@ object AccessSqls {
        AND DATE >= '${setValue("DATE", fromDate)}'
        AND DATE <= '${setValue("DATE", toDate)}'
        GROUP BY
-       SUPPLIER_CATEGORY,
+       B.CATEGORY,
        SUPPLIER_NAME,
-       |B.MULTIPLIER_AMT
+       B.MULTIPLIER_AMT
        """.stripMargin
   }
 

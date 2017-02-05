@@ -1,6 +1,6 @@
 angular.module('ExpenseApp', ['720kb.datepicker']).controller('expenseController', function($scope, $http) {
 
-        $scope.headers = ["DATE","SUPPLIER_NAME","SUPPLIER_CATEGORY","EXPENSE_AMT","PERCENTAGE_AMT","USER"]
+        $scope.headers = ["DATE","SUPPLIER_NAME","EXPENSE_AMT","USER"]
 
         $scope.getExpenses = function(){
 
@@ -82,14 +82,8 @@ angular.module('ExpenseApp', ['720kb.datepicker']).controller('expenseController
                 header: "SUPPLIER_NAME",
                 value: $scope.supplierName
             },{
-                header: "SUPPLIER_CATEGORY",
-                value: $scope.category
-            },{
                 header: "EXPENSE_AMT",
                 value: $scope.amount
-            },{
-                header: "PERCENTAGE_AMT",
-                value: $scope.percent
             },{
                 header: "USER",
                 value: $scope.user
