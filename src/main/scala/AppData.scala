@@ -91,6 +91,15 @@ object AppData {
     }
   }
 
+  def getReportByCategory(fromDate: String, toDate: String): List[Row] = {
+    Try(conn.createStatement().executeQuery(AccessSqls.generateReportByCategory(fromDate,toDate))) match {
+      case Success(result) =>
+        extractDataFromDb(result)
+      case Failure(e) =>
+        List[Row]()
+    }
+  }
+
   def getReportGetGrandTotal(fromDate: String, toDate: String): List[Row] = {
     Try(conn.createStatement().executeQuery(AccessSqls.generateTotalReport(fromDate,toDate))) match {
       case Success(result) =>

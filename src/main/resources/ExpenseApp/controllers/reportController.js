@@ -2,9 +2,10 @@ angular.module('ExpenseApp', ['720kb.datepicker']).controller('reportController'
 
 
           $scope.headers1 = ["Category", "Supplier Name", "Expense Date", "Total Amount", "Percentage" , 'D AND J AMOUNT', "Entered By"];
-          $scope.headers2 = ["Category", "Supplier Name", "Total"];
+          $scope.headers2 = ["Category", "Supplier Name", "Total", "Rate"];
           $scope.headers3 = ["Company", "Month", "Total", "Month Num"];
           $scope.headers4 = ["Company", "Total"];
+          $scope.headers5 = ["Category", "Total", "Rate"];
 
           $http.get("/getData/users").then(function(response) {
               $scope.users = response.data;
@@ -21,6 +22,11 @@ angular.module('ExpenseApp', ['720kb.datepicker']).controller('reportController'
          }
          var report2 = {
          name: "Supplier",
+         fromDate: $scope.fromDate,
+         toDate: $scope.toDate
+         }
+         var report5 = {
+         name: "Category",
          fromDate: $scope.fromDate,
          toDate: $scope.toDate
          }
@@ -56,10 +62,13 @@ angular.module('ExpenseApp', ['720kb.datepicker']).controller('reportController'
             report3.toDate = toDate;
             report4.fromDate = fromDate;
             report4.toDate = toDate;
+            report5.fromDate = fromDate;
+            report5.toDate = toDate;
             $http.post('/report', report1, {headers: { 'Content-Type': 'application/json; charset=UTF-8'}}).success(function(data,status){$scope.rows1 = data});
             $http.post('/report', report2, {headers: { 'Content-Type': 'application/json; charset=UTF-8'}}).success(function(data,status){$scope.rows2 = data});
             $http.post('/report', report3, {headers: { 'Content-Type': 'application/json; charset=UTF-8'}}).success(function(data,status){$scope.rows3 = data});
             $http.post('/report', report4, {headers: { 'Content-Type': 'application/json; charset=UTF-8'}}).success(function(data,status){$scope.rows4 = data});
+            $http.post('/report', report5, {headers: { 'Content-Type': 'application/json; charset=UTF-8'}}).success(function(data,status){$scope.rows4 = data});
        var the = ""
         }
 

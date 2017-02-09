@@ -58,6 +58,8 @@ class ExpenseApp extends App {
 
   def reportBySupplier(fromDate: String, toDate: String) = AppData.getReportBySupplier(fromDate, toDate)
 
+  def reportByCategory(fromDate: String, toDate: String) = AppData.getReportByCategory(fromDate, toDate)
+
   def monthlyReport(fromDate: String, toDate: String) = AppData.getReportGetMonthlyTotal(fromDate, toDate)
 
   def totalReport(fromDate: String, toDate: String) = AppData.getReportGetGrandTotal(fromDate, toDate)

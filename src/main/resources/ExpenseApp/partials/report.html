@@ -66,6 +66,7 @@
         <ul class="nav nav-stacked nav-pills">
             <li ng-class="{active:isSet(1)}"><a href ng-click="setTab(1)">Full Report</a></li>
             <li ng-class="{active:isSet(2)}"><a href ng-click="setTab(2)">Supplier Total</a></li>
+            <li ng-class="{active:isSet(5)}"><a href ng-click="setTab(5)">Category Total</a></li>
             <li ng-class="{active:isSet(3)}"><a href ng-click="setTab(3)">Monthly Total</a></li>
             <li ng-class="{active:isSet(4)}"><a href ng-click="setTab(4)">Grand Total</a></li>
         </ul>
@@ -88,6 +89,16 @@
                     <td ng-repeat="header in headers2">{{header}}</td>
                 </tr>
                 <tr ng-repeat="row in rows2">
+                    <td ng-repeat="data in row.row.slice().reverse()">{{data.value}}</td>
+                </tr>
+            </table>
+        </div>
+        <div ng-show="isSet(5)">
+            <table class="table">
+                <tr>
+                    <td ng-repeat="header in headers5">{{header}}</td>
+                </tr>
+                <tr ng-repeat="row in rows5">
                     <td ng-repeat="data in row.row.slice().reverse()">{{data.value}}</td>
                 </tr>
             </table>

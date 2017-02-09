@@ -180,6 +180,7 @@ class ExpenseEndpoint(tool: ExpenseApp) extends Actor with HttpService with Spra
                 request.name match {
                   case "Full" => tool.basicReport(request.fromDate,request.toDate)
                   case "Supplier" => tool.reportBySupplier(request.fromDate,request.toDate)
+                  case "Category" => tool.reportByCategory(request.fromDate,request.toDate)
                   case "Monthly" => tool.monthlyReport(request.fromDate,request.toDate)
                   case "Total" => tool.totalReport(request.fromDate,request.toDate)
                 }

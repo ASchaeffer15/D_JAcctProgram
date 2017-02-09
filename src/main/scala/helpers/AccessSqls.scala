@@ -96,6 +96,22 @@ object AccessSqls {
        """.stripMargin
   }
 
+  def generateReportByCategory(fromDate: String, toDate: String) = {
+    s"""
+      SELECT
+       B.CATEGORY AS "Category",
+       SUM(EXPENSE_AMT * B.MULTIPLIER_AMT) AS "Total"
+       FROM EXPENSES AS A
+       JOIN SUPPLIER AS B
+       ON A.SUPPLIER_NAME = B.NAME
+       WHERE 1=1
+       AND DATE >= '${setValue("DATE", fromDate)}'
+       AND DATE <= '${setValue("DATE", toDate)}'
+       GROUP BY
+       B.CATEGORY
+       """.stripMargin
+  }
+
   def generateTotalReport(fromDate: String, toDate: String) = {
     s"""
       SELECT
