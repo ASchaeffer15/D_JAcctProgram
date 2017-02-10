@@ -18,7 +18,7 @@ import _root_.scala.concurrent.duration._
 object S$R extends App {
 
   private def getFiles: List[File] = {
-    val appDir = """D:\data""".stripMargin
+    val appDir = """E:\Data""".stripMargin
     val files = new File(s"$appDir\\Expense_App_Logs\\Tables\\Current")
     val filesArray = files.listFiles
     if (filesArray == null) {
@@ -29,6 +29,7 @@ object S$R extends App {
   }
 
 
+ override def main(args: Array[String]): Unit = {
 
 val files = getFiles
   val charset = StandardCharsets.UTF_8
@@ -36,10 +37,12 @@ val files = getFiles
   files.foreach {
     x =>
       var content = new String(Files.readAllBytes(Paths.get(x.getAbsolutePath)), charset)
-      content = content.replaceAll("&", "&amp;")
+      content = content.replaceAll("&amp;", " and ")
+      content = content.replaceAll("&", " and ")
       Files.write(Paths.get(x.getAbsolutePath), content.getBytes(charset))
 
   }
 
 
+ }
 }
